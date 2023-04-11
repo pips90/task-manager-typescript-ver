@@ -1,9 +1,15 @@
 import "./App.css";
+import TaskForm from "./components/TaskForm/TaskForm";
+import { Task } from "./features/slices/taskSlice";
+
+const handleAddTask = () => {
+  // dispatch here
+};
 
 function App() {
   return (
     <>
-      <h3>Task Manager</h3>
+      <TaskForm onSubmit={handleAddTask} />
     </>
   );
 }
