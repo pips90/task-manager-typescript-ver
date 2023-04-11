@@ -16,8 +16,8 @@ To get started with the Task Manager App, follow these steps:
 - Clone the repository to your local machine using git clone.
 - Navigate to the project directory.
 - Install dependencies using npm install.
-- Start the JSON-Server using npm run server to simulate the backend RESTful API for task data.
-- In a separate terminal window, start the React app using npm start to run the Task Manager App in development mode.
+- Start the JSON-Server using 'npm run json-server' to simulate the backend RESTful API for task data.
+- In a separate terminal window, start the React app using 'npm start' to run the Task Manager App in development mode.
 - Open your web browser and go to http://localhost:3000 to access the Task Manager App.
 
 # Usage
