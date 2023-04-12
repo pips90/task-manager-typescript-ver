@@ -1,7 +1,6 @@
 import "./App.css";
 import { useAppDispatch } from "./app/hooks";
 import TaskForm from "./components/TaskForm/TaskForm";
-import TaskList from "./components/TaskList/TaskList";
 import { Task, createTask } from "./features/slices/taskSlice";
 
 function App() {
