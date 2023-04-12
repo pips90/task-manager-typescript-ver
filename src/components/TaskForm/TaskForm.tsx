@@ -26,6 +26,8 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleAddTask(title, body);
+    setTitle("");
+    setBody("");
   };
 
   const handleCardClick = (task: Task) => {
