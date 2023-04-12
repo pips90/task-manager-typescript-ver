@@ -1,19 +1,14 @@
 {
-  "posts": [
+  "tasks": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id": "30f840d2-5c6c-4e65-96cc-d31b1372e328",
+      "title": "my task",
+      "textBody": "tasks"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "12dc83c5-5439-4469-9418-f7e4a0579f80",
+      "title": "todo list",
+      "textBody": "groceries"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
