@@ -1,19 +1,18 @@
 import { Button, Card, Form } from "react-bootstrap";
-import { Task } from "../../features/slices/taskSlice";
+import { Task, createTask } from "../../features/slices/taskSlice";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import TaskList from "../TaskList/TaskList";
 
-// import { type } from "./../../app/store";
+import { useAppDispatch } from "../../app/hooks";
 
-interface TaskFormProps {
-  onSubmit: (task: Task) => void;
-}
+const TaskForm = () => {
+  const dispatch = useAppDispatch();
 
-const TaskForm = ({ onSubmit }: TaskFormProps) => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [isCardSelected, setIsCardSelected] = useState<boolean>(false);
+  const [clickedCardId, setclickedCardId] = useState<string>("");
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -31,19 +30,29 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
   };
 
   const handleCardClick = (task: Task) => {
+    console.log(task.id);
+    setclickedCardId(task.id);
     setTitle(task.title);
     setBody(task.textBody);
     setIsCardSelected(true);
   };
 
   const handleAddTask = (title: string, body: string) => {
-    const task: Task = {
-      id: uuidv4(),
-      title: title,
-      textBody: body,
-    };
-
-    onSubmit(task);
+    if (isCardSelected === true) {
+      const task = {
+        id: clickedCardId,
+        title: title,
+        textBody: body,
+      };
+      console.log("Edited Task", task);
+    } else {
+      const task = {
+        id: uuidv4(),
+        title: title,
+        textBody: body,
+      };
+      dispatch(createTask(task));
+    }
   };
 
   return (

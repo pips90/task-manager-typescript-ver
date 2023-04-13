@@ -57,6 +57,19 @@ export const fetchTasks = createAsyncThunk("task/fetchTasks", async () => {
   }
 });
 
+// Dispatching
+export const checkExistingTasks = createAsyncThunk(
+  "task/checkExistingTasks",
+  async (task: Task) => {
+    console.log(task.id);
+    return await fetch(`http://localhost:3001/tasks/${task.id}`).then(
+      (response) => {
+        return JSON.stringify(response.json());
+      }
+    );
+  }
+);
+
 export const taskSlice = createSlice({
   name: "task",
   initialState,
@@ -84,6 +97,18 @@ export const taskSlice = createSlice({
         state.tasks = action.payload;
         state.loading = false;
         state.error = null;
+      })
+      .addCase(checkExistingTasks.pending, (state) => {
+        console.log("pending");
+      })
+      .addCase(checkExistingTasks.fulfilled, (state, action) => {
+        console.log("fulfilled");
+        console.log(action.payload);
+        //const dispatch = useAppDispatch();
+        // dispatch(createTask(task))
+      })
+      .addCase(checkExistingTasks.rejected, (state) => {
+        console.log("error");
       });
   },
 });
