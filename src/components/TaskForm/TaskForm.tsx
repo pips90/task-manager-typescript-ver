@@ -49,7 +49,6 @@ const TaskForm = () => {
 
   const handleCardClick = (task: Task) => {
     // Click on task card
-    console.log(task.id);
     setclickedCardId(task.id);
     setTitle(task.title);
     setBody(task.textBody);
@@ -58,7 +57,6 @@ const TaskForm = () => {
 
   const handleDeleteTask = async () => {
     // Delete task card
-    console.log("Task is deleted");
     await dispatch(deleteTask(clickedCardId)).then(() => {
       dispatch(fetchTasks());
     });
@@ -66,7 +64,6 @@ const TaskForm = () => {
 
   const handleCancelClick = () => {
     // cancelling edit/delete will clear fields and soft refresh
-    console.log("cancel button is being called");
     dispatch(cancelClick());
     setIsCardSelected(false);
     setTitle("");

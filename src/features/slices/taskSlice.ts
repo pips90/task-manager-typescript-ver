@@ -87,8 +87,6 @@ export const editTask = createAsyncThunk(
 export const deleteTask = createAsyncThunk(
   "task/deleteTasks",
   async (taskId: string) => {
-    console.log(taskId);
-
     await fetch(`http://localhost:3001/tasks/${taskId}`, {
       method: "DELETE",
     });
@@ -101,7 +99,6 @@ export const taskSlice = createSlice({
   reducers: {
     cancelClick: (state) => {
       state.cancelled = true;
-      console.log(state);
     },
   },
 
