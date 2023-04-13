@@ -1,34 +1,9 @@
 {
   "tasks": [
     {
-      "id": "30f840d2-5c6c-4e65-96cc-d31b1372e328",
-      "title": "my task",
-      "textBody": "tasks"
-    },
-    {
-      "id": "12dc83c5-5439-4469-9418-f7e4a0579f80",
-      "title": "todo list",
-      "textBody": "groceries"
-    },
-    {
-      "id": "efd6654a-0946-49a0-b1f9-042c92c5b683",
-      "title": "Grocery List",
-      "textBody": "apples, bananas, oranges, pears, pasta, cheese"
-    },
-    {
-      "id": "255cfae7-b6db-4326-a5fd-ea4d63be9732",
-      "title": "my task",
-      "textBody": "boolean"
-    },
-    {
-      "id": "1772b50d-03ef-4500-b6cc-2cda0571689c",
-      "title": "aa",
-      "textBody": "aa"
-    },
-    {
-      "id": "1754a1f0-1abe-46a8-bda3-e3e802900990",
-      "title": "My Title",
-      "textBody": "My New Task"
+      "id": "3160ebd2-3c71-41cb-ac2f-62ace716a242",
+      "title": "My Title 3",
+      "textBody": "My Task 3.0"
     }
   ]
 }

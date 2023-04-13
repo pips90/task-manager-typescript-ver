@@ -10,12 +10,14 @@ export interface Task {
 
 export interface TaskState {
   tasks: Task[];
+  status: string;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: TaskState = {
   tasks: [],
+  status: "idle",
   loading: false,
   error: null,
 };
@@ -57,18 +59,52 @@ export const fetchTasks = createAsyncThunk("task/fetchTasks", async () => {
   }
 });
 
-// Dispatching
-export const checkExistingTasks = createAsyncThunk(
-  "task/checkExistingTasks",
+export const editTask = createAsyncThunk(
+  "task/editTasks",
   async (task: Task) => {
-    console.log(task.id);
-    return await fetch(`http://localhost:3001/tasks/${task.id}`).then(
-      (response) => {
-        return JSON.stringify(response.json());
+    try {
+      const response = await fetch(`http://localhost:3001/tasks/${task.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+      if (response.ok) {
+        const updatedTask = await response.json();
+        return updatedTask;
+      } else {
+        throw new Error("Failed to edit task.");
       }
-    );
+    } catch (error) {
+      throw new Error("Failed to edit task.");
+    }
   }
 );
+
+export const deleteTask = createAsyncThunk(
+  "task/deleteTasks",
+  async (taskId: string) => {
+    console.log(taskId);
+
+    await fetch(`http://localhost:3001/tasks/${taskId}`, {
+      method: "DELETE",
+    });
+  }
+);
+
+// Dispatching
+// export const checkExistingTasks = createAsyncThunk(
+//   "task/checkExistingTasks",
+//   async (task: Task) => {
+//     console.log(task.id);
+//     return await fetch(`http://localhost:3001/tasks/${task.id}`).then(
+//       (response) => {
+//         return JSON.stringify(response.json());
+//       }
+//     );
+//   }
+// );
 
 export const taskSlice = createSlice({
   name: "task",
@@ -98,17 +134,26 @@ export const taskSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(checkExistingTasks.pending, (state) => {
-        console.log("pending");
+      .addCase(editTask.pending, (state) => {
+        state.status = "loading";
       })
-      .addCase(checkExistingTasks.fulfilled, (state, action) => {
-        console.log("fulfilled");
-        console.log(action.payload);
-        //const dispatch = useAppDispatch();
-        // dispatch(createTask(task))
+      .addCase(editTask.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.status = action.payload;
       })
-      .addCase(checkExistingTasks.rejected, (state) => {
-        console.log("error");
+      .addCase(editTask.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error ? action.error.message || null : null;
+      })
+      .addCase(deleteTask.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteTask.fulfilled, (state) => {
+        state.status = "succeeded";
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error ? action.error.message || null : null;
       });
   },
 });
