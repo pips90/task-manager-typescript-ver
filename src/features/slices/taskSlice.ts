@@ -12,6 +12,7 @@ export interface TaskState {
   tasks: Task[];
   status: string;
   loading: boolean;
+  cancelled: boolean;
   error: string | null;
 }
 
@@ -19,6 +20,7 @@ const initialState: TaskState = {
   tasks: [],
   status: "idle",
   loading: false,
+  cancelled: false,
   error: null,
 };
 
@@ -93,24 +95,14 @@ export const deleteTask = createAsyncThunk(
   }
 );
 
-// Dispatching
-// export const checkExistingTasks = createAsyncThunk(
-//   "task/checkExistingTasks",
-//   async (task: Task) => {
-//     console.log(task.id);
-//     return await fetch(`http://localhost:3001/tasks/${task.id}`).then(
-//       (response) => {
-//         return JSON.stringify(response.json());
-//       }
-//     );
-//   }
-// );
-
 export const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    // add your reducers here.
+    cancelClick: (state) => {
+      state.cancelled = true;
+      console.log(state);
+    },
   },
 
   // add your actions for fetch requests here.
@@ -159,7 +151,7 @@ export const taskSlice = createSlice({
 });
 
 // put your actions in here
-export const {} = taskSlice.actions;
+export const { cancelClick } = taskSlice.actions;
 
 // think of useSelector- but to get your task id.
 export const selectTaskId = (state: RootState) =>

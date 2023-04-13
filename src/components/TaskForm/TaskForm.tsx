@@ -1,6 +1,7 @@
 import { Button, Card, Form } from "react-bootstrap";
 import {
   Task,
+  cancelClick,
   createTask,
   deleteTask,
   editTask,
@@ -12,6 +13,17 @@ import TaskList from "../TaskList/TaskList";
 
 import { useAppDispatch } from "../../app/hooks";
 
+/* Future Work
+
+interface inputFields {
+  title: string;
+  body: string;
+}
+
+  const [task, setTask] = useState<inputFields>({title: "", body: ""}) This should be implented so I don't have to keep setting them separately
+
+*/
+
 const TaskForm = () => {
   const dispatch = useAppDispatch();
 
@@ -19,7 +31,6 @@ const TaskForm = () => {
   const [body, setBody] = useState<string>("");
   const [isCardSelected, setIsCardSelected] = useState<boolean>(false);
   const [clickedCardId, setclickedCardId] = useState<string>("");
-  const [isTaskDeleted, setIsTaskDeleted] = useState<boolean>(false);
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -37,6 +48,7 @@ const TaskForm = () => {
   };
 
   const handleCardClick = (task: Task) => {
+    // Click on task card
     console.log(task.id);
     setclickedCardId(task.id);
     setTitle(task.title);
@@ -45,14 +57,24 @@ const TaskForm = () => {
   };
 
   const handleDeleteTask = async () => {
-    // Delete task
+    // Delete task card
     console.log("Task is deleted");
     await dispatch(deleteTask(clickedCardId)).then(() => {
-      dispatch(fetchTasks()); // Dispatch fetchTasks() after successfully dispatching deleteTask()
+      dispatch(fetchTasks());
     });
   };
 
+  const handleCancelClick = () => {
+    // cancelling edit/delete will clear fields and soft refresh
+    console.log("cancel button is being called");
+    dispatch(cancelClick());
+    setIsCardSelected(false);
+    setTitle("");
+    setBody("");
+  };
+
   const handleAddTask = async (title: string, body: string) => {
+    // when task is submitted whether adding, or editing a task card
     if (isCardSelected === true) {
       // Edit task
       const task = {
@@ -72,12 +94,6 @@ const TaskForm = () => {
       dispatch(createTask(task));
     }
   };
-
-  // const handleDeleteTask = (id: string) => {
-  //   dispatch(deleteTask(clickedCardId)).then(() => {
-  //     dispatch(fetchTasks());
-  //   });
-  // };
 
   return (
     <>
@@ -113,9 +129,14 @@ const TaskForm = () => {
               {isCardSelected ? "Edit" : "Add Task"}
             </Button>
             {isCardSelected && (
-              <Button type="button" onClick={() => handleDeleteTask()}>
-                Delete
-              </Button>
+              <>
+                <Button type="button" onClick={() => handleDeleteTask()}>
+                  Delete
+                </Button>
+                <Button type="button" onClick={() => handleCancelClick()}>
+                  x
+                </Button>
+              </>
             )}
           </Form.Group>
         </Form>
