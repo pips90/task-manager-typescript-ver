@@ -60,6 +60,9 @@ const TaskForm = () => {
     await dispatch(deleteTask(clickedCardId)).then(() => {
       dispatch(fetchTasks());
     });
+    setIsCardSelected(false);
+    setTitle("");
+    setBody("");
   };
 
   const handleCancelClick = () => {

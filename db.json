@@ -3,7 +3,7 @@
     {
       "id": "642b12e6-1611-4d40-a991-0c1213f92d28",
       "title": "My First Task",
-      "textBody": "Item 1"
+      "textBody": "Item 1.0"
     },
     {
       "id": "b2e1b99a-4b8a-419f-bcd9-4a645fb303d2",
@@ -36,7 +36,7 @@
       "textBody": "Item 7"
     },
     {
-      "id": "6e469332-9736-4f50-9766-4b48c21d5e00",
+      "id": "07f95e4c-e7a7-47c0-af05-7c5dbb4e42c0",
       "title": "My Eighth Task",
       "textBody": "Item 8"
     }
