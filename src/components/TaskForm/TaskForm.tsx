@@ -121,23 +121,40 @@ const TaskForm = () => {
               onChange={onBodyChange}
             />
           </Form.Group>
-          <Form.Group className="d-flex justify-content-end">
-            <Button type="submit">
+          <Form.Group
+            className="d-flex justify-content-end"
+            style={{ marginBottom: ".5rem", marginTop: ".5rem" }}
+          >
+            <Button style={{ marginRight: ".5rem" }} type="submit">
               {isCardSelected ? "Edit" : "Add Task"}
-            </Button>
+            </Button>{" "}
             {isCardSelected && (
               <>
-                <Button type="button" onClick={() => handleDeleteTask()}>
+                <Button
+                  variant="danger"
+                  style={{ marginRight: ".5rem" }}
+                  type="button"
+                  onClick={() => handleDeleteTask()}
+                >
                   Delete
-                </Button>
-                <Button type="button" onClick={() => handleCancelClick()}>
+                </Button>{" "}
+                <Button
+                  variant=" rounded-circle "
+                  style={{
+                    marginRight: ".5rem",
+                    backgroundColor: "#D3D3D3",
+                  }}
+                  type="button"
+                  onClick={() => handleCancelClick()}
+                >
                   x
                 </Button>
               </>
             )}
           </Form.Group>
         </Form>
-      </Card>
+      </Card>{" "}
+      <br />
       <TaskList onCardClick={handleCardClick} />
     </>
   );
