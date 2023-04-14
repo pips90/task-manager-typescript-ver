@@ -114,6 +114,7 @@ const TaskForm = () => {
               value={title}
               placeholder="Title"
               onChange={onTitleChange}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -122,6 +123,7 @@ const TaskForm = () => {
               value={body}
               placeholder="Put your tasks here"
               onChange={onBodyChange}
+              required
             />
           </Form.Group>
           <Form.Group
